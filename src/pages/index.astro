@@ -1,12 +1,20 @@
 ---
-import Hero from "../components/Hero.astro";
 import Layout from "../layouts/Layout.astro";
+import Hero from "../sections/Hero.astro";
+import News from "../sections/News.astro";
+import Gods from "../sections/Gods.astro";
+import Maps from "../sections/Maps.astro";
+import Footer from "../sections/Footer.astro";
 ---
 
-<Layout title="Welcome to Astro.">
+<Layout title="Smite Landing Page">
     <main>
         <Hero />
+        <News />
+        <Gods />
+        <Maps />
     </main>
+    <Footer />
 </Layout>
 
 <style></style>

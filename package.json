@@ -12,6 +12,10 @@
   "dependencies": {
     "@astrojs/check": "^0.7.0",
     "@astrojs/tailwind": "^5.1.0",
+    "@fontsource-variable/oswald": "^5.0.20",
+    "@fontsource/barlow-semi-condensed": "^5.0.20",
+    "@fontsource/montserrat": "^5.0.18",
+    "@fontsource/prata": "^5.0.19",
     "astro": "^4.11.0",
     "tailwindcss": "^3.4.4",
     "typescript": "^5.5.2"
