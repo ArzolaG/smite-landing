@@ -4,7 +4,7 @@ export default {
     theme: {
         extend: {
             fontFamily: {
-                oswald: ["Oswald", "sans-serif"],
+                oswald: ["Oswald Variable", "sans-serif"],
                 montserrat: ["Montserrat", "sans-serif"],
                 prata: ["Prata", "serif"],
             },
