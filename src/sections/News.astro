@@ -1,5 +1,6 @@
 ---
 import DownloadButton from "../components/DownloadButton.astro";
+import LatestNews from "../components/LatestNews.astro";
 ---
 
 <section class="flex flex-col w-full px-5 py-28 sm:px-24">
@@ -21,6 +22,8 @@ import DownloadButton from "../components/DownloadButton.astro";
             <img class="w-full" src="/img/smite-gameplay.jpg" alt="Smite Gameplay" />
         </div>
     </div>
+
+    <LatestNews />
 </section>
 
 <style>
@@ -59,7 +62,7 @@ import DownloadButton from "../components/DownloadButton.astro";
         position: absolute;
         transform: translate(50px, 60px);
         background-color: rgba(255, 255, 255, 0.1);
-        border: 2px solid var(--color-primary);
+        border: 1px solid var(--color-primary);
         z-index: -1;
     }
 </style>

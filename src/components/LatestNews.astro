@@ -1,0 +1,53 @@
+---
+const NEWS = [
+    {
+        id: "gem_sale",
+        date: "06/07/2024",
+        category: "News",
+        title: "Gem sale - 33% off storewide",
+        url: "#",
+    },
+    {
+        id: "patch_notes",
+        date: "06/04/2024",
+        category: "Updates",
+        title: "SMITE PATCH NOTES 11.5",
+        url: "#",
+    },
+    {
+        id: "smite_2",
+        date: "05/23/2024",
+        category: "New Release",
+        title: "announcing smite 2",
+        url: "#",
+    },
+    {
+        id: "developer_insights",
+        date: "05/12/2024",
+        category: "Dev",
+        title: "smite developer insights",
+        url: "#",
+    },
+];
+---
+
+<section class="mt-20">
+    <div class="flex w-full justify-between gap-5">
+        {
+            NEWS.map(({ id, date, category, title, url }) => {
+                return (
+                    <a href={url}>
+                        <div class="p-[18px] border border-solid bg-[#292929] border-primary/75">
+                            <img src={`/img/news/${id}.jpg`} alt={`${title} Image`} />
+                        </div>
+                        <div class="text-[14px] uppercase flex gap-4 mt-2">
+                            <span class="text-white/60">{date}</span>
+                            <span class="text-primary/80">{category}</span>
+                        </div>
+                        <h4 class="text-2xl uppercase">{title}</h4>
+                    </a>
+                );
+            })
+        }
+    </div>
+</section>
