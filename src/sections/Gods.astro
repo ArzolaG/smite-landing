@@ -68,4 +68,56 @@ const GODS = [
 ];
 ---
 
-<section></section>
+{
+    GODS.map(({ id, name, slogan, bio, category, combat_type, pantheon, type, abilities }) => {
+        return (
+            <section class="flex flex-col w-full px-5 py-28 sm:px-24 bg-cover" style={`background-image: url(/img/${id}/${id}.webp)`}>
+                <div>
+                    <div class="flex flex-col w-2/5">
+                        <h4 class="font-oswald uppercase text-white/75 text-[28px]">{slogan}</h4>
+                        <h2 class="font-oswald uppercase text-[100px] leading-[110px]">{name}</h2>
+                        <p class="font-montserrat text-xl text-white/90 mt-10 mb-12">{bio}</p>
+                        <div class="flex gap-8 items-center text-center uppercase text-xl text-white/75">
+                            <div class="flex flex-col gap-3 justify-between">
+                                <img src={`/img/${category}.png`} alt={`${category} icon`} />
+                                <span>{category}</span>
+                            </div>
+                            <div class="flex flex-col gap-3">
+                                <img src={`/img/${combat_type}.png`} alt={`${combat_type} icon`} />
+                                <span>{combat_type}</span>
+                            </div>
+                            <div class="flex flex-col gap-3">
+                                <img src={`/img/${pantheon}.png`} alt={`${pantheon} icon`} />
+                                <span>{pantheon}</span>
+                            </div>
+                            <div class="flex flex-col gap-3 justify-between">
+                                <img src={`/img/${type}.png`} alt={`${type} icon`} />
+                                <span>{type}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex justify-between">
+                        <div>Abilities</div>
+                        <div>Gods</div>
+                    </div>
+                </div>
+            </section>
+        );
+    })
+}
+
+<style>
+    section {
+        position: relative;
+        z-index: 1;
+    }
+    section::before {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        inset: 0;
+        background: linear-gradient(90deg, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.5) 65%, rgba(0, 0, 0, 0) 100%);
+        z-index: -1;
+    }
+</style>
