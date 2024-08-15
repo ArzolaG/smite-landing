@@ -1,180 +1,113 @@
 ---
-interface AbilitySpecs {
-    [key: string]: string;
-}
-interface Ability {
-    id: string;
-    name: string;
-    type: string;
-    description: string;
-    specs?: AbilitySpecs;
-}
-
-interface God {
-    id: string;
-    name: string;
-    slogan: string;
-    bio: string;
-    category: string;
-    combat_type: string;
-    pantheon: string;
-    type: string;
-    abilities: Ability[];
-}
-
-const GODS: God[] = [
-    {
-        id: "scylla",
-        name: "Scylla",
-        slogan: "Horror of the Sea",
-        bio: "Ancient poems warn of a treacherous channel where sailors face a deadly choice: risk their ship near the monstrous whirlpool Charybdis or navigate the rocky shoals inhabited by Scylla, Horror of the Sea. No ship escapes her waters unscathed. Survivors tell of enormous black tentacles with hound heads that splinter ships with precision, accompanied by her child-like, bloodthirsty laughter.",
-        category: "mage",
-        combat_type: "ranged",
-        pantheon: "greek",
-        type: "magical",
-        abilities: [
-            {
-                id: "sic_em",
-                name: "Sic 'Em",
-                type: "1",
-                description:
-                    "Scylla sends two hounds forward, damaging, Rooting, and Crippling the first enemy hit. At max rank, two additional enemies nearby the first target will also be hit.",
-                specs: {
-                    Damage: "60/110/160/210/260 (+75% of your magical power)",
-                    "Root Duration": "1.75s",
-                },
-            },
-            {
-                id: "quick_learner",
-                name: "Quick Learner",
-                type: "passive",
-                description:
-                    "Each of Scylla's abilities gain an additional effect at max rank. In  addition, Scylla gains 25 Magical Power for each max rank ability.",
-            },
-
-            {
-                id: "crush",
-                name: "Crush",
-                type: "2",
-                description:
-                    "Scylla creates a Magical field that Slows enemies. After 5s it detonates and damages enemies, dealing 20% increased damage to Minions and Jungle Camps. Scylla may activate the ability again to detonate it early. At max rank, enemies in the area also have their Magical Protection reduced, and targets hit by the damage retain the debuff and are Slowed for 1s.",
-                specs: {
-                    Damage: "100/155/210/265/320 (85% of your Magical Power)",
-                    "Max Rank Debuff": "isrank5/15% Magical Protection Reduced",
-                    Slow: "30%",
-                },
-            },
-            {
-                id: "sentinel",
-                name: "Sentinel",
-                type: "3",
-                description:
-                    "Passive: Scylla gains MP5. Active: Scylla summons a sentinel to the target area, granting vision of enemies for 5s. Scylla may activate the ability again within 5s to move to the sentinel location. At max rank, the vision is granted through line of sight blockers, and placement range increases.",
-                specs: {
-                    "Passive MP5": "4/6/8/10/12",
-                    "Summon Range": "65/65/65/65/70",
-                    "Vision Range": "40/50/60/70/80",
-                },
-            },
-            {
-                id: "monster",
-                name: "I'm a Monster",
-                type: "4",
-                description:
-                    "Scylla reveals her true nature, becoming immune to Crowd Control for the next 6s, and gaining movement speed. She may make one powerful attack during this time. If she kills an enemy god with the attack, she gains another 6s and may attack again. At max rank, the movement speed bonus doubles.",
-                specs: {
-                    "Damage per Hit": "400/500/600/700/800 (120% of your Magical Power)",
-                    "Movement Speed": "35/35/35/35/70%",
-                },
-            },
-        ],
-    },
-];
+import { GODS } from "../data/godsData";
 ---
 
-{
-    GODS.map(({ id, name, slogan, bio, category, combat_type, pantheon, type, abilities }) => {
-        return (
-            <section class="flex flex-col w-full px-5 py-28 sm:px-24 bg-cover" style={`background-image: url(/img/${id}/${id}.webp)`}>
-                <div>
-                    <div class="flex flex-col w-2/5">
-                        <h4 class="font-oswald uppercase text-white/75 text-[28px]">{slogan}</h4>
-                        <h2 class="font-oswald uppercase text-[100px] leading-[110px]">{name}</h2>
-                        <p class="font-montserrat text-xl text-white/90 mt-10 mb-12">{bio}</p>
-                        <div class="flex gap-8 items-center text-center uppercase text-xl text-white/75">
-                            <div class="flex flex-col gap-3 justify-between">
-                                <img src={`/img/${category}.png`} alt={`${category} icon`} />
-                                <span>{category}</span>
+<div class="relative overflow-x-hidden">
+    <div class="flex relative" id="gods-container">
+        {
+            GODS.map(({ id, name, slogan, bio, category, combat_type, pantheon, type, abilities, color }) => {
+                return (
+                    <section
+                        class="w-full flex flex-shrink-0 flex-col px-5 py-28 sm:px-24 bg-cover"
+                        style={`background-image: url(/img/${id}/${id}.webp)`}
+                    >
+                        <div>
+                            <div class="flex flex-col w-2/5">
+                                <h4 class="font-oswald uppercase text-white/75 text-[28px]">{slogan}</h4>
+                                <h2 class="font-oswald uppercase text-[100px] leading-[110px]">{name}</h2>
+                                <p class="font-montserrat text-xl text-white/90 mt-10 mb-12">{bio}</p>
+                                <div class="flex gap-8 items-center text-center uppercase text-xl text-white/75">
+                                    <div class="flex flex-col gap-3 justify-between">
+                                        <img class="max-w-[75px]" src={`/img/${category}.png`} alt={`${category} icon`} />
+                                        <span>{category}</span>
+                                    </div>
+                                    <div class="flex flex-col gap-3">
+                                        <img class="max-w-[75px]" src={`/img/${combat_type}.png`} alt={`${combat_type} icon`} />
+                                        <span>{combat_type}</span>
+                                    </div>
+                                    <div class="flex flex-col gap-3">
+                                        <img class="max-w-[75px]" src={`/img/${pantheon}.png`} alt={`${pantheon} icon`} />
+                                        <span>{pantheon}</span>
+                                    </div>
+                                    <div class="flex flex-col gap-3 justify-between">
+                                        <img class="max-w-[75px]" src={`/img/${type}.png`} alt={`${type} icon`} />
+                                        <span>{type}</span>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="flex flex-col gap-3">
-                                <img src={`/img/${combat_type}.png`} alt={`${combat_type} icon`} />
-                                <span>{combat_type}</span>
-                            </div>
-                            <div class="flex flex-col gap-3">
-                                <img src={`/img/${pantheon}.png`} alt={`${pantheon} icon`} />
-                                <span>{pantheon}</span>
-                            </div>
-                            <div class="flex flex-col gap-3 justify-between">
-                                <img src={`/img/${type}.png`} alt={`${type} icon`} />
-                                <span>{type}</span>
+                            <div class="flex justify-between mt-[40px] items-end">
+                                <div class="w-2/5">
+                                    <h3 class="font-oswald uppercase text-[32px] text-white/75 mb-5 ">Abilities</h3>
+                                    <nav>
+                                        <div class="flex gap-8 bg-black/50">
+                                            {abilities.map(({ id: abilityId, name: abilityName }, index) => {
+                                                return (
+                                                    <li class={`${index === 0 ? "bg-black" : ""}`}>
+                                                        <div
+                                                            class={`${index === 0 ? `border-2 border-solid border-b-0` : ""} p-[15px]`}
+                                                            style={{ borderColor: `${color}B3` }}
+                                                        >
+                                                            <img src={`/img/${id}/${abilityId}.webp`} alt={abilityName} />
+                                                        </div>
+                                                    </li>
+                                                );
+                                            })}
+                                        </div>
+                                        <div>
+                                            {abilities.map(({ type, description, specs, name: abilityName }, index) => {
+                                                return (
+                                                    <li
+                                                        class={`${index === 0 ? "active" : "hidden"} p-[15px] bg-black/50 border-2 border-solid mt-[-2px]`}
+                                                        style={{ borderColor: `${color}B3` }}
+                                                    >
+                                                        <div class="flex gap-2 items-center">
+                                                            <span class="uppercase text-white/60 text-xl">{type}</span>
+                                                            <span class="w-1 h-[2px] bg-white/60" />
+                                                            <span class="uppercase font-bold text-xl">{abilityName}</span>
+                                                        </div>
+                                                        <p class="font-montserrat mt-2">{description}</p>
+                                                        <p class="mt-5">
+                                                            {specs
+                                                                ? Object.keys(specs).map((keyName, i) => {
+                                                                      return (
+                                                                          <div class="font-montserrat mt-2">
+                                                                              <span class="font-bold">{keyName}</span>:{" "}
+                                                                              <span class="text-white/70">{specs[keyName]}</span>
+                                                                          </div>
+                                                                      );
+                                                                  })
+                                                                : ""}
+                                                        </p>
+                                                    </li>
+                                                );
+                                            })}
+                                        </div>
+                                    </nav>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="flex justify-between mt-[100px]">
-                        <div class="w-2/5">
-                            <h3 class="font-oswald uppercase text-[32px] text-white/75 mb-5 ">Abilities</h3>
-                            <nav>
-                                <div class="flex gap-8 bg-black/50">
-                                    {abilities.map(({ id: abilityId, name: abilityName }, index) => {
-                                        return (
-                                            <li class={`${index === 0 ? "bg-black" : ""}`}>
-                                                <div
-                                                    class={`${index === 0 ? "border border-solid border-[#992dd7a6] border-b-0" : ""} p-[15px]`}
-                                                >
-                                                    <img src={`/img/${id}/${abilityId}.webp`} alt={abilityName} />
-                                                </div>
-                                            </li>
-                                        );
-                                    })}
-                                </div>
-                                <div>
-                                    {abilities.map(({ type, description, specs, name: abilityName }, index) => {
-                                        return (
-                                            <li
-                                                class={`${index === 0 ? "active" : "hidden"} p-[15px] bg-black/50 border border-solid border-[#992dd7a6] mt-[-1px]`}
-                                            >
-                                                <div class="flex gap-2 items-center">
-                                                    <span class="uppercase text-white/60 text-xl">{type}</span>
-                                                    <span class="w-1 h-[2px] bg-white/60" />
-                                                    <span class="uppercase font-bold text-xl">{abilityName}</span>
-                                                </div>
-                                                <p class="font-montserrat mt-2">{description}</p>
-                                                <p class="mt-5">
-                                                    {specs
-                                                        ? Object.keys(specs).map((keyName, i) => {
-                                                              return (
-                                                                  <div class="font-montserrat mt-2">
-                                                                      <span class="font-bold">{keyName}</span>:{" "}
-                                                                      <span class="text-white/70">{specs[keyName]}</span>
-                                                                  </div>
-                                                              );
-                                                          })
-                                                        : ""}
-                                                </p>
-                                            </li>
-                                        );
-                                    })}
-                                </div>
-                            </nav>
+                    </section>
+                );
+            })
+        }
+    </div>
+    <div class="absolute god-selector-container text-center">
+        <div class={`flex flex-col gap-8 bg-black/70 px-[24px] pt-[24px] pb-[14px] border-2 border-white`}>
+            {
+                GODS.map(({ id, name }, index) => {
+                    return (
+                        <div class="flex flex-col items-center gap-2">
+                            <div id="god-selector" class="cursor-pointer">
+                                <img class="grayscale border" src={`/img/${id}/${id}_icon.webp`} alt={`${name} Icon`} />
+                                <span class="text-xl">{name}</span>
+                            </div>
                         </div>
-
-                        <div>Gods</div>
-                    </div>
-                </div>
-            </section>
-        );
-    })
-}
+                    );
+                })
+            }
+        </div>
+    </div>
+</div>
 
 <style>
     section {
@@ -193,4 +126,53 @@ const GODS: God[] = [
     li {
         list-style: none;
     }
+    #gods-container {
+        transition: transform 0.5s ease;
+    }
+    .god-selector-container {
+        bottom: 20%;
+        right: 4.5%;
+        z-index: 1;
+    }
+    .grayscale {
+        filter: grayscale(100%);
+        transition: filter 0.3s ease;
+    }
+    .grayscale:hover {
+        filter: grayscale(50%);
+    }
+
+    .active {
+        filter: grayscale(0);
+    }
 </style>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const godsContainer = document.querySelector("#gods-container") as HTMLElement;
+        const godSelectors = document.querySelectorAll("#god-selector");
+
+        if (godSelectors.length > 0) {
+            const firstGod = godSelectors[0].querySelector("img");
+            if (firstGod) {
+                firstGod.classList.add("active");
+            }
+        }
+
+        godSelectors.forEach((selector, index) => {
+            selector.addEventListener("click", () => {
+                if (godsContainer) {
+                    godsContainer.style.transform = `translateX(-${index * 100}%)`;
+
+                    godSelectors.forEach((s) => {
+                        s.querySelector("img")?.classList.add("grayscale");
+                        s.querySelector("img")?.classList.remove("active");
+                    });
+
+                    selector.querySelector("img")?.classList.remove("grayscale");
+                    selector.querySelector("img")?.classList.add("active");
+                }
+            });
+        });
+    });
+</script>
