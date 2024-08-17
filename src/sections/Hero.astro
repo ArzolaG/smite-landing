@@ -1,29 +1,7 @@
 ---
 import DownloadButton from "../components/DownloadButton.astro";
 import LearnMoreButton from "../components/LearnMoreButton.astro";
-
-const SOCIALS = [
-    {
-        id: "twitter",
-        name: "Twitter",
-        url: "https://twitter.com/smitegame",
-    },
-    {
-        id: "youtube",
-        name: "YouTube",
-        url: "https://youtube.com/user/smitegame",
-    },
-    {
-        id: "discord",
-        name: "Discord",
-        url: "https://discord.gg/smitegame",
-    },
-    {
-        id: "twitch",
-        name: "Twitch",
-        url: "https://twitch.tv/smitegame",
-    },
-];
+import Socials from "../components/Socials.astro";
 
 const SPONSORS = [
     {
@@ -53,15 +31,7 @@ const SPONSORS = [
     </div>
     <div class="px-5 sm:px-24">
         <div class="border-solid border-t-2 py-5 border-white w-full flex justify-between">
-            <div class="flex gap-5">
-                {
-                    SOCIALS.map(({ id, name, url }) => (
-                        <a href={url}>
-                            <img src={`/svg/${id}.svg`} alt={`${name} Logo`} />
-                        </a>
-                    ))
-                }
-            </div>
+            <Socials />
             <div class="flex gap-5 items-center">
                 {
                     SPONSORS.map(({ id, name, url }) => (

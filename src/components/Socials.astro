@@ -1,0 +1,34 @@
+---
+const SOCIALS = [
+    {
+        id: "twitter",
+        name: "Twitter",
+        url: "https://twitter.com/smitegame",
+    },
+    {
+        id: "youtube",
+        name: "YouTube",
+        url: "https://youtube.com/user/smitegame",
+    },
+    {
+        id: "discord",
+        name: "Discord",
+        url: "https://discord.gg/smitegame",
+    },
+    {
+        id: "twitch",
+        name: "Twitch",
+        url: "https://twitch.tv/smitegame",
+    },
+];
+---
+
+<div class="flex gap-5">
+    {
+        SOCIALS.map(({ id, name, url }) => (
+            <a href={url}>
+                <img src={`/svg/${id}.svg`} alt={`${name} Logo`} />
+            </a>
+        ))
+    }
+</div>
