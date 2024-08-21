@@ -2,10 +2,10 @@
 
 ---
 
-<section class="flex flex-col w-full px-5 py-28 sm:px-24">
+<section id="maps" class="flex flex-col w-full px-5 pt-28 pb-44 sm:px-24">
     <h2 class="text-[102px] uppercase font-oswald">Maps</h2>
 
-    <div class="flex flex-col w-full">
+    <div class="flex flex-col w-full maps-container">
         <div class="map-card w-[45%] self-end mt-[-80px]">
             <div
                 class="py-10 px-14 font-oswald map"
@@ -17,14 +17,14 @@
                 <div class="map-content flex flex-col gap-2">
                     <h4 class="text-3xl uppercase">Joust</h4>
                     <p class="font-montserrat max-w-[70%]">
-                        This is a typical MOBA mode with two bases at opposite sides of the map connected by three lanes. Each lane is
-                        protected by two towers and a Phoenix.
+                        Joust mode features a single-lane map and a side jungle. Your base, defended by one Phoenix and a Titan, sits on one
+                        end. Your enemy's base is on the other. Average game time is around 15 minutes.
                     </p>
                     <div class="flex gap-8">
                         <div><span class="text-primary mr-2">Players:</span> 3</div>
-                        <div><span class="text-primary mr-2">Game Duration:</span> 30 minutes</div>
+                        <div><span class="text-primary mr-2">Game Duration:</span> 20-30 minutes</div>
                     </div>
-                    <img class="max-w-[120px] mt-5" src="/img/conquest_minimap.webp" alt="Conquest Minimap" />
+                    <img class="max-w-[120px] mt-5" src="/img/joust_minimap.webp" alt="Conquest Minimap" />
                 </div>
             </div>
         </div>
@@ -44,7 +44,7 @@
                     </p>
                     <div class="flex gap-8">
                         <div><span class="text-primary mr-2">Players:</span> 3</div>
-                        <div><span class="text-primary mr-2">Game Duration:</span> 30 minutes</div>
+                        <div><span class="text-primary mr-2">Game Duration:</span> 30-60 minutes</div>
                     </div>
                     <img class="max-w-[120px] mt-5" src="/img/conquest_minimap.webp" alt="Conquest Minimap" />
                 </div>
@@ -61,14 +61,14 @@
                 <div class="map-content flex flex-col gap-2">
                     <h4 class="text-3xl uppercase">Arena</h4>
                     <p class="font-montserrat max-w-[70%]">
-                        This is a typical MOBA mode with two bases at opposite sides of the map connected by three lanes. Each lane is
-                        protected by two towers and a Phoenix.
+                        The gladiators have called out for help and the gods have answered. The Arena game mode is a brawling deathmatch
+                        where your goal is to defeat enemy players and their minions by reducing their side's ticket count to zero.
                     </p>
                     <div class="flex gap-8">
-                        <div><span class="text-primary mr-2">Players:</span> 3</div>
-                        <div><span class="text-primary mr-2">Game Duration:</span> 30 minutes</div>
+                        <div><span class="text-primary mr-2">Players:</span> 5</div>
+                        <div><span class="text-primary mr-2">Game Duration:</span> 15-20 minutes</div>
                     </div>
-                    <img class="max-w-[120px] mt-5" src="/img/conquest_minimap.webp" alt="Conquest Minimap" />
+                    <img class="max-w-[120px] mt-5" src="/img/arena_minimap.webp" alt="Conquest Minimap" />
                 </div>
             </div>
         </div>
@@ -83,14 +83,14 @@
                 <div class="map-content flex flex-col gap-2">
                     <h4 class="text-3xl uppercase">Siege</h4>
                     <p class="font-montserrat max-w-[70%]">
-                        This is a typical MOBA mode with two bases at opposite sides of the map connected by three lanes. Each lane is
-                        protected by two towers and a Phoenix.
+                        Siege is a Conquest-like game type, with two lanes on a small map. Try to acquire siege juggernauts to push lanes
+                        quickly.
                     </p>
                     <div class="flex gap-8">
-                        <div><span class="text-primary mr-2">Players:</span> 3</div>
+                        <div><span class="text-primary mr-2">Players:</span> 4</div>
                         <div><span class="text-primary mr-2">Game Duration:</span> 30 minutes</div>
                     </div>
-                    <img class="max-w-[120px] mt-5" src="/img/conquest_minimap.webp" alt="Conquest Minimap" />
+                    <img class="max-w-[120px] mt-5" src="/img/siege_minimap.webp" alt="Conquest Minimap" />
                 </div>
             </div>
         </div>
@@ -148,8 +148,8 @@
         flex-direction: column;
         opacity: 0;
         transition:
-            0.3s opacity ease-in-out,
-            0.3s visibility ease-in-out;
+            0.4s opacity ease-in-out,
+            0.4s visibility ease-in-out;
         visibility: hidden;
         position: absolute;
     }
@@ -160,8 +160,8 @@
     }
     .map-title {
         transition:
-            0.3s opacity ease-in-out,
-            0.3s visibility ease-in-out;
+            0.4s opacity ease-in-out,
+            0.4s visibility ease-in-out;
         position: relative;
         opacity: 1;
     }
@@ -170,5 +170,44 @@
         opacity: 0;
         visibility: hidden;
         position: absolute;
+    }
+
+    .maps-container {
+        position: relative;
+    }
+    .maps-container > div:nth-child(1)::before {
+        content: "";
+        position: absolute;
+        width: 50%;
+        height: 14.4%;
+        left: 5%;
+        top: 5%;
+        border-width: 1px 0px 0px 1px;
+        border-style: solid;
+        border-color: var(--primary-color);
+    }
+
+    .maps-container > div:nth-child(2)::after {
+        content: "";
+        position: absolute;
+        width: 50%;
+        height: 14.4%;
+        left: 5%;
+        top: 48.9%;
+        border-width: 0px 0px 1px 1px;
+        border-style: solid;
+        border-color: var(--primary-color);
+    }
+
+    .maps-container > div:nth-child(3)::after {
+        content: "";
+        position: absolute;
+        width: 90%;
+        height: 33%;
+        right: 5%;
+        top: 74.5%;
+        border-width: 0px 1px 1px 0px;
+        border-style: solid;
+        border-color: var(--primary-color);
     }
 </style>

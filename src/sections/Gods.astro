@@ -2,7 +2,7 @@
 import { GODS } from "../data/godsData";
 ---
 
-<div class="relative overflow-x-hidden">
+<section id="gods" class="relative overflow-x-hidden">
     <div class="flex relative" id="gods-container">
         {
             GODS.map(({ id, name, slogan, bio, category, combat_type, pantheon, type, abilities, color }) => {
@@ -107,7 +107,7 @@ import { GODS } from "../data/godsData";
             }
         </div>
     </div>
-</div>
+</section>
 
 <style>
     section {
