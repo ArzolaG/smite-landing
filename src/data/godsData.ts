@@ -12,6 +12,14 @@ export const GODS: God[] = [
         type: "magical",
         color:"#992DD7",
         abilities: [
+            
+            {
+                id: "quick_learner",
+                name: "Quick Learner",
+                type: "passive",
+                description:
+                    "Each of Scylla's abilities gain an additional effect at max rank. In  addition, Scylla gains 25 Magical Power for each max rank ability.",
+            },
             {
                 id: "sic_em",
                 name: "Sic 'Em",
@@ -23,14 +31,6 @@ export const GODS: God[] = [
                     "Root Duration": "1.75s",
                 },
             },
-            {
-                id: "quick_learner",
-                name: "Quick Learner",
-                type: "passive",
-                description:
-                    "Each of Scylla's abilities gain an additional effect at max rank. In  addition, Scylla gains 25 Magical Power for each max rank ability.",
-            },
-
             {
                 id: "crush",
                 name: "Crush",

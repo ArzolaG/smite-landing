@@ -3,22 +3,24 @@ import DownloadButton from "../components/DownloadButton.astro";
 import LatestNews from "../components/LatestNews.astro";
 ---
 
-<section id="news" class="flex flex-col w-full px-5 py-28 sm:px-24">
-    <h2 class="sm:text-[72px] xl:mb-10 xl:text-[90px] 2xl:text-[102px] uppercase font-oswald">Latest News</h2>
+<section id="news" class="flex flex-col w-full px-5 py-12 lg:py-28 sm:px-12 lg:px-24">
+    <h2 class="text-5xl sm:text-[72px] xl:mb-10 xl:text-[90px] 2xl:text-[102px] uppercase font-oswald">Latest News</h2>
 
-    <div class="flex items-center justify-center gap-8 xl:mt-[0px] 2xl:mt-[-50px] sm:gap-[180px] xl:ml-[100px] 2xl:ml-[180px]">
-        <div class="w-[35%] flex flex-col gap-10 items-start">
+    <div
+        class="flex flex-col sm:flex-row items-center justify-center gap-8 mt-7 xl:mt-[0px] 2xl:mt-[-50px] lg:gap-[180px] xl:ml-[100px] 2xl:ml-[180px]"
+    >
+        <div class="w-full sm:w-1/2 lg:w-[35%] flex flex-col gap-10 items-start">
             <div class="flex items-center relative">
                 <img src="/img/egypt.webp" alt="Egyptian Path" />
-                <h3 class="text-[32px] uppercase absolute w-max">New Egyptian God</h3>
+                <h3 class="text-xl sm:text-[32px] uppercase absolute w-max">New Egyptian God</h3>
             </div>
-            <p class="font-montserrat text-xl">
+            <p class="font-montserrat text-base lg:text-xl">
                 Lorem ipsum dolor sit amet consectetur. Felis maecenas cursus faucibus amet aenean. Lorem ipsum dolor sit amet consectetur.
                 Lorem ipsum dolor sit amet consectetur. Felis maecenas cursus faucibus amet aenean. Lorem ipsum dolor sit amet consectetur.
             </p>
             <DownloadButton />
         </div>
-        <div class="w-[65%] pr-[50px] pb-[50px] gameplay">
+        <div class="sm:w-1/2 lg:w-[65%] pr-10 lg:pr-[50px] lg:pb-[50px] gameplay">
             <img class="w-full" src="/img/smite-gameplay.jpg" alt="Smite Gameplay" />
         </div>
     </div>
@@ -70,6 +72,27 @@ import LatestNews from "../components/LatestNews.astro";
         section::before {
             left: 3%;
             top: 8%;
+        }
+    }
+    @media screen and (max-width: 1024px) {
+        section::before {
+            left: 3%;
+            top: 6%;
+        }
+    }
+    @media screen and (max-width: 640px) {
+        section::before {
+            display: none;
+        }
+        .gameplay::after {
+            width: 88%;
+            height: 88%;
+        }
+    }
+    @media screen and (max-width: 450px) {
+        .gameplay::after {
+            width: 82%;
+            height: 82%;
         }
     }
 </style>

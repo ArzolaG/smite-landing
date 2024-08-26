@@ -23,11 +23,11 @@ const SOCIALS = [
 ];
 ---
 
-<div class="flex gap-5">
+<div class="flex gap-2 sm:gap-5">
     {
         SOCIALS.map(({ id, name, url }) => (
             <a href={url}>
-                <img src={`/svg/${id}.svg`} alt={`${name} Logo`} />
+                <img class="max-w-[28px] sm:max-w-[43px]" src={`/svg/${id}.svg`} alt={`${name} Logo`} />
             </a>
         ))
     }
