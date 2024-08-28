@@ -4,16 +4,23 @@ import DownloadButton from "../components/DownloadButton.astro";
 
 <header class="z-10 fixed w-full flex justify-between items-center px-5 sm:px-12 xl:px-24 py-3 sm:py-7">
     <img class="w-32 sm:w-48" src="/img/smite-logo.webp" alt="Smite Logo" />
-    <nav>
-        <ul class="flex items-center gap-16 uppercase text-xl">
-            <li><a href="#home">Home</a></li>
-            <li><a href="#news">News</a></li>
-            <li><a href="#gods">Gods</a></li>
-            <li><a href="#maps">Maps</a></li>
-            <li><a href="#play">Play</a></li>
-            <DownloadButton />
-        </ul>
-    </nav>
+    <div id="menu-toggle" class="lg:hidden">
+        <div class="bar-1"></div>
+        <div class="bar-2"></div>
+        <div class="bar-3"></div>
+    </div>
+    <div class="menu">
+        <nav>
+            <ul class="flex items-center gap-16 uppercase text-xl">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#news">News</a></li>
+                <li><a href="#gods">Gods</a></li>
+                <li><a href="#maps">Maps</a></li>
+                <li><a href="#play">Play</a></li>
+                <DownloadButton />
+            </ul>
+        </nav>
+    </div>
 </header>
 
 <style>
@@ -27,7 +34,108 @@ import DownloadButton from "../components/DownloadButton.astro";
         z-index: 1;
     }
     header > * {
-        position: relative;
         z-index: 2;
     }
+    #menu-toggle {
+        display: none;
+        flex-direction: column;
+        gap: 8px;
+        cursor: pointer;
+        z-index: 999;
+    }
+    #menu-toggle div {
+        width: 30px;
+        height: 2px;
+        background-color: #fff;
+        transition: 0.3s all ease;
+    }
+
+    .change .bar-1 {
+        transform: translate(0, 10px) rotate(-45deg);
+    }
+
+    .change .bar-2 {
+        opacity: 0;
+        visibility: hidden;
+    }
+    .change .bar-3 {
+        transform: translate(0, -10px) rotate(45deg);
+    }
+    .menu ul li a {
+        position: relative;
+    }
+    .menu ul li a:hover::before,
+    .menu ul li a:hover::after {
+        opacity: 1;
+    }
+    .menu ul li a::before,
+    .menu ul li a::after {
+        content: "";
+        height: 10px;
+        width: 10px;
+        position: absolute;
+        transition: all 0.3s ease;
+        opacity: 0;
+        transform: translate(0, 0);
+    }
+    .menu ul li a::before {
+        left: 0;
+        bottom: 0;
+        border-bottom: 2px solid #fff;
+        border-left: 2px solid #fff;
+    }
+    .menu ul li a:hover::before {
+        transform: translate(-80%, 55%);
+    }
+    .menu ul li a:hover::after {
+        transform: translate(80%, -55%);
+    }
+
+    .menu ul li a:after {
+        right: 0;
+        top: 0;
+        border-top: 2px solid #fff;
+        border-right: 2px solid #fff;
+    }
+
+    @media screen and (max-width: 1024px) {
+        #menu-toggle {
+            display: flex;
+        }
+        .menu {
+            transition: 0.5s all ease;
+        }
+        .menu {
+            position: absolute;
+            width: 100vw;
+            height: 100vh;
+            top: 0;
+            left: 100%;
+            background-color: rgba(4, 14, 24, 0.92);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .menu ul {
+            flex-direction: column;
+        }
+        .left-0 {
+            left: 0;
+        }
+    }
 </style>
+
+<script>
+    const toggleButton = document.querySelector("#menu-toggle");
+    const navMenu = document.querySelector(".menu");
+    toggleButton?.addEventListener("click", () => {
+        toggleButton.classList.toggle("change");
+        navMenu?.classList.toggle("left-0");
+    });
+    navMenu?.querySelectorAll("ul li a")?.forEach((element) => {
+        element.addEventListener("click", () => {
+            toggleButton?.classList.remove("change");
+            navMenu?.classList.remove("left-0");
+        });
+    });
+</script>
