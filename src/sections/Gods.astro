@@ -49,7 +49,7 @@ import { GODS } from "../data/godsData";
                                             {abilities.map(({ id: abilityId, name: abilityName }, index) => {
                                                 return (
                                                     <li
-                                                        class={`${index === 0 ? "bg-black" : ""} cursor-pointer hover:bg-black/70 transition-all duration-250`}
+                                                        class={`${index === 0 ? "bg-black" : ""} cursor-pointer hover:bg-black/70 transition-all duration-300`}
                                                         id="ability-selector"
                                                     >
                                                         <div
@@ -208,7 +208,7 @@ import { GODS } from "../data/godsData";
         const godSelectors = document.querySelectorAll("#god-selector");
         const abilitySelector = document.querySelectorAll("#ability-selector");
         const abilityDescription = document.querySelectorAll("#ability-description");
-        let selectedGod = 0;
+        let selectedGodIndex = 0;
 
         if (godSelectors.length > 0) {
             const firstGod = godSelectors[0].querySelector("img");
@@ -217,47 +217,51 @@ import { GODS } from "../data/godsData";
             }
         }
 
+        const updateAbilitySelectors = (selectedGodIndex: number) => {
+            abilityDescription.forEach((desc, index) => {
+                const firstAbilityIndex = index % 5 === 0;
+
+                desc.classList.remove("active");
+                desc.classList.add("hidden");
+                if (firstAbilityIndex) {
+                    desc.classList.add("active");
+                    desc.classList.remove("hidden");
+                }
+            });
+
+            abilityDescription[5 * selectedGodIndex].classList.add("active");
+            abilityDescription[5 * selectedGodIndex].classList.remove("hidden");
+
+            abilitySelector.forEach((a) => {
+                const element = a.firstElementChild as HTMLElement;
+                a.classList.remove("bg-black");
+                element.style.borderColor = "transparent";
+                element.style.borderBottomColor = "transparent";
+            });
+
+            const abilityDiv = abilitySelector[5 * selectedGodIndex].firstElementChild as HTMLElement;
+            abilityDiv.style.borderColor = GODS[selectedGodIndex].color;
+            abilityDiv.style.borderBottomColor = "black";
+            abilitySelector[5 * selectedGodIndex].classList.add("bg-black");
+        };
+
         godSelectors.forEach((selector, index) => {
             selector.addEventListener("click", () => {
-                if (godsContainer) {
-                    godsContainer.style.transform = `translateX(-${index * 100}%)`;
+                godsContainer.style.transform = `translateX(-${index * 100}%)`;
 
-                    godSelectors.forEach((s) => {
-                        s.querySelector("img")?.classList.add("grayscale");
-                        s.querySelector("img")?.classList.remove("active");
-                    });
-
-                    selector.querySelector("img")?.classList.remove("grayscale");
-                    selector.querySelector("img")?.classList.add("active");
-                }
-
-                selectedGod = index;
-
-                abilityDescription.forEach((desc, index) => {
-                    const firstAbilityIndex = index % 5 === 0;
-
-                    desc.classList.remove("active");
-                    desc.classList.add("hidden");
-                    if (firstAbilityIndex) {
-                        desc.classList.add("active");
-                        desc.classList.remove("hidden");
-                    }
+                godSelectors.forEach((god) => {
+                    const img = god.querySelector("img");
+                    img?.classList.add("grayscale");
+                    img?.classList.remove("active");
                 });
 
-                abilityDescription[5 * selectedGod].classList.add("active");
-                abilityDescription[5 * selectedGod].classList.remove("hidden");
+                const currentImg = selector.querySelector("img");
+                currentImg?.classList.remove("grayscale");
+                currentImg?.classList.add("active");
 
-                abilitySelector.forEach((a) => {
-                    const element = a.firstElementChild as HTMLElement;
-                    a.classList.remove("bg-black");
-                    element.style.borderColor = "transparent";
-                    element.style.borderBottomColor = "transparent";
-                });
+                selectedGodIndex = index;
 
-                const abilityDiv = abilitySelector[5 * selectedGod].firstElementChild as HTMLElement;
-                abilityDiv.style.borderColor = GODS[selectedGod].color;
-                abilityDiv.style.borderBottomColor = "black";
-                abilitySelector[5 * selectedGod].classList.add("bg-black");
+                updateAbilitySelectors(selectedGodIndex);
             });
         });
 
