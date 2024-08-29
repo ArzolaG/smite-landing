@@ -3,7 +3,8 @@ import DownloadButton from "../components/DownloadButton.astro";
 ---
 
 <header class="z-10 fixed w-full flex justify-between items-center px-5 sm:px-12 xl:px-24 py-3 sm:py-7">
-    <img class="w-32 sm:w-48" src="/img/smite-logo.webp" alt="Smite Logo" />
+    <a href="#"><img class="w-32 sm:w-48" src="/img/smite-logo.webp" alt="Smite Logo" /></a>
+
     <div id="menu-toggle" class="lg:hidden">
         <div class="bar-1"></div>
         <div class="bar-2"></div>
@@ -11,7 +12,7 @@ import DownloadButton from "../components/DownloadButton.astro";
     </div>
     <div class="menu">
         <nav>
-            <ul class="flex items-center gap-16 uppercase text-xl">
+            <ul class="flex items-center gap-16 uppercase text-2xl">
                 <li><a href="#home">Home</a></li>
                 <li><a href="#news">News</a></li>
                 <li><a href="#gods">Gods</a></li>
@@ -89,6 +90,13 @@ import DownloadButton from "../components/DownloadButton.astro";
     }
     .menu ul li a:hover::after {
         transform: translate(80%, -55%);
+    }
+
+    .menu ul li a:active::before {
+        transform: translate(-50%, 25%);
+    }
+    .menu ul li a:active::after {
+        transform: translate(50%, -25%);
     }
 
     .menu ul li a:after {

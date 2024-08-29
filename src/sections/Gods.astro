@@ -45,10 +45,13 @@ import { GODS } from "../data/godsData";
                                 <div class="sm:w-[70%] lg:w-[65%] 2xl:w-[45%]">
                                     <h3 class="font-oswald uppercase text-[32px] text-white/75 mb-5 ">Abilities</h3>
                                     <nav>
-                                        <div class="flex gap-4 sm:gap-8 bg-black/50">
+                                        <div class="flex gap-4 sm:gap-8 bg-black/70">
                                             {abilities.map(({ id: abilityId, name: abilityName }, index) => {
                                                 return (
-                                                    <li class={`${index === 0 ? "bg-black" : ""} cursor-pointer`} id="ability-selector">
+                                                    <li
+                                                        class={`${index === 0 ? "bg-black" : ""} cursor-pointer hover:bg-black/70 transition-all duration-250`}
+                                                        id="ability-selector"
+                                                    >
                                                         <div
                                                             class={`border-2 p-[10px] sm:p-[15px] ability-icon transition-all duration-300`}
                                                             style={{
@@ -175,6 +178,9 @@ import { GODS } from "../data/godsData";
         .god-selector-container {
             top: 100px;
         }
+        section::before {
+            background: linear-gradient(90deg, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.8) 65%, rgba(0, 0, 0, 0.4) 100%);
+        }
     }
     @media screen and (max-width: 640px) {
         .god-selector-container {
@@ -187,6 +193,9 @@ import { GODS } from "../data/godsData";
             background-size: cover;
             background-position: -1000px center;
             background-repeat: no-repeat;
+        }
+        section::before {
+            background: linear-gradient(90deg, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.8) 65%, rgba(0, 0, 0, 0.6) 100%);
         }
     }
 </style>
@@ -252,13 +261,7 @@ import { GODS } from "../data/godsData";
             });
         });
 
-        let color = "";
         abilitySelector.forEach((ability, index) => {
-            if (index === 0) {
-                const element = ability.firstElementChild as HTMLElement;
-                const computedStyle = window.getComputedStyle(element);
-                color = computedStyle.getPropertyValue("border-color");
-            }
             ability.addEventListener("click", () => {
                 const abilityDiv = ability.firstElementChild as HTMLElement;
 
