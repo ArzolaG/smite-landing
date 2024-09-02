@@ -206,8 +206,9 @@ import { GODS } from "../data/godsData";
     document.addEventListener("DOMContentLoaded", () => {
         const godsContainer = document.querySelector("#gods-container") as HTMLElement;
         const godSelectors = document.querySelectorAll("#god-selector");
-        const abilitySelector = document.querySelectorAll("#ability-selector");
-        const abilityDescription = document.querySelectorAll("#ability-description");
+        const abilitySelectors = document.querySelectorAll("#ability-selector");
+        const abilityDescriptions = document.querySelectorAll("#ability-description");
+        const abilityCount = 5;
         let selectedGodIndex = 0;
 
         if (godSelectors.length > 0) {
@@ -217,32 +218,45 @@ import { GODS } from "../data/godsData";
             }
         }
 
-        const updateAbilitySelectors = (selectedGodIndex: number) => {
-            abilityDescription.forEach((desc, index) => {
-                const firstAbilityIndex = index % 5 === 0;
+        const toggleClass = (element: Element, addClass: string, removeClass: string) => {
+            element.classList.add(addClass);
+            element.classList.remove(removeClass);
+        };
 
-                desc.classList.remove("active");
-                desc.classList.add("hidden");
+        const removeBorder = (element: Element) => {
+            const elementChild = element.firstElementChild as HTMLElement;
+
+            element.classList.remove("bg-black");
+            elementChild.style.borderColor = "transparent";
+            elementChild.style.borderBottomColor = "transparent";
+        };
+
+        const showBorder = (element: HTMLElement, index: number) => {
+            element.style.borderColor = GODS[index].color;
+            element.style.borderBottomColor = "black";
+            abilitySelectors[abilityCount * index].classList.add("bg-black");
+        };
+
+        const updateAbilitySelectors = (selectedGodIndex: number) => {
+            abilityDescriptions.forEach((desc, index) => {
+                const firstAbilityIndex = index % abilityCount === 0;
+
+                toggleClass(desc, "hidden", "active");
+
                 if (firstAbilityIndex) {
-                    desc.classList.add("active");
-                    desc.classList.remove("hidden");
+                    toggleClass(desc, "active", "hidden");
                 }
             });
 
-            abilityDescription[5 * selectedGodIndex].classList.add("active");
-            abilityDescription[5 * selectedGodIndex].classList.remove("hidden");
+            toggleClass(abilityDescriptions[abilityCount * selectedGodIndex], "active", "hidden");
 
-            abilitySelector.forEach((a) => {
-                const element = a.firstElementChild as HTMLElement;
-                a.classList.remove("bg-black");
-                element.style.borderColor = "transparent";
-                element.style.borderBottomColor = "transparent";
+            abilitySelectors.forEach((ability) => {
+                removeBorder(ability);
             });
 
-            const abilityDiv = abilitySelector[5 * selectedGodIndex].firstElementChild as HTMLElement;
-            abilityDiv.style.borderColor = GODS[selectedGodIndex].color;
-            abilityDiv.style.borderBottomColor = "black";
-            abilitySelector[5 * selectedGodIndex].classList.add("bg-black");
+            const abilityDiv = abilitySelectors[abilityCount * selectedGodIndex].firstElementChild as HTMLElement;
+
+            showBorder(abilityDiv, selectedGodIndex);
         };
 
         godSelectors.forEach((selector, index) => {
@@ -250,14 +264,12 @@ import { GODS } from "../data/godsData";
                 godsContainer.style.transform = `translateX(-${index * 100}%)`;
 
                 godSelectors.forEach((god) => {
-                    const img = god.querySelector("img");
-                    img?.classList.add("grayscale");
-                    img?.classList.remove("active");
+                    const img = god.querySelector("img") as Element;
+                    toggleClass(img, "grayscale", "active");
                 });
 
-                const currentImg = selector.querySelector("img");
-                currentImg?.classList.remove("grayscale");
-                currentImg?.classList.add("active");
+                const currentImg = selector.querySelector("img") as Element;
+                toggleClass(currentImg, "active", "grayscale");
 
                 selectedGodIndex = index;
 
@@ -265,29 +277,24 @@ import { GODS } from "../data/godsData";
             });
         });
 
-        abilitySelector.forEach((ability, index) => {
+        abilitySelectors.forEach((ability, index) => {
             ability.addEventListener("click", () => {
                 const abilityDiv = ability.firstElementChild as HTMLElement;
 
                 if (!ability.classList.contains("bg-black")) {
-                    abilitySelector.forEach((a) => {
-                        const element = a.firstElementChild as HTMLElement;
-                        a.classList.remove("bg-black");
-                        element.style.borderColor = "transparent";
-                        element.style.borderBottomColor = "transparent";
+                    abilitySelectors.forEach((ability) => {
+                        removeBorder(ability);
                     });
 
-                    abilityDescription.forEach((desc, indexNew) => {
-                        if (indexNew < selectedGod * 5 + 5) {
-                            desc.classList.remove("active");
-                            desc.classList.add("hidden");
+                    abilityDescriptions.forEach((desc, indexNew) => {
+                        if (indexNew < selectedGodIndex * 5 + 5) {
+                            toggleClass(desc, "hidden", "active");
                         }
                     });
 
-                    abilityDescription[index].classList.add("active");
-                    abilityDescription[index].classList.remove("hidden");
+                    toggleClass(abilityDescriptions[index], "active", "hidden");
 
-                    abilityDiv.style.borderColor = GODS[selectedGod].color;
+                    abilityDiv.style.borderColor = GODS[selectedGodIndex].color;
                     abilityDiv.style.borderBottomColor = "black";
                     ability.classList.add("bg-black");
                 }

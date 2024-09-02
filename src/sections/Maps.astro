@@ -176,6 +176,10 @@
     .maps-container {
         position: relative;
     }
+    .maps-container > div::before,
+    .maps-container > div::after {
+        pointer-events: none;
+    }
     .maps-container > div:nth-child(1)::before {
         content: "";
         position: absolute;
